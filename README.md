@@ -69,13 +69,13 @@ My-Flask-School/
 
 1. **Клонируй репозиторий**
 ```bash
-git clone https://github.com/your-username/My-Flask-School.git
+git clone https://github.com/pablaofficeal/My-Flask-School.git
 cd My-Flask-School
 ```
 
 2. **Установи зависимости**
 ```bash
-pip install flask flask-sqlalchemy flask-wtf python-dotenv
+pip install -r requirements.txt
 ```
 
 3. **Запусти приложение**
@@ -175,11 +175,9 @@ WTF_CSRF_ENABLED = True                 # CSRF защита
 
 ## 👨‍💻 **Автор**
 
-**Твой никнейм** - *Крутой разработчик*
+**PablaOfficeal** - *Крутой разработчик*
 
-- 💌 Email: your.email@example.com
-- 🐙 GitHub: [@your-username](https://github.com/your-username)
-- 💬 Telegram: [@your_telegram](https://t.me/your_telegram)
+- 🐙 GitHub: [@PablaOfficeal](https://github.com/PablaOfficeal)
 
 ---
 
