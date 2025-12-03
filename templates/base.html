@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+</head>
+<body>
+    <div class="main-menu">
+        <nav>
+            <ul>
+                <li>
+                    <a href="/">
+                        <span>Главная</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/register">
+                        <span>Регистрация</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/login">
+                        <span>Вход</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    {% block content %}{% endblock %}
+</body>
+</html>
