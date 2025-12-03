@@ -17,7 +17,7 @@ def login():
                 user.last_login = datetime.utcnow()
                 db.session.commit()
                 flash('Успешный вход в систему!', 'success')
-                return redirect(url_for('home_bpp.index'))
+                return redirect(url_for('homes_bpp.home'))
             else:
                 flash('Ваш аккаунт деактивирован. Пожалуйста, свяжитесь с администратором.', 'danger')
         else:

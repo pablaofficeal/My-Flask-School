@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+</head>
+<body>
+    <div class="main-menu">
+        <nav>
+            <ul>
+                <li>
+                    <a href="{{ url_for('homes_bpp.home') }}">
+                        <span>Главная</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span>Профиль</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('oauth_logout_bpp.logout') }}">
+                        <span>Виход</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    
+    {% block content %}{% endblock %}
+
+    <footer>
+        <p>&copy; 2026 Все права защищены.</p>
+    </footer>
+    
+</body>
+</html>
