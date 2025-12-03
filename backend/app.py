@@ -12,7 +12,7 @@ from routers.checks.oauth.logout import oauth_logout_bpp
 from routers.home.homes import homes_bpp
 from routers.home.profile import profile_bpp
 
-app = Flask(__name__, template_folder='templates')
+app = Flask(__name__, template_folder='../frontend/templates', static_folder='../frontend/static')
 app.config.from_object(Config)
 
 # ЖЁСТКАЯ БЕЗОПАСНОСТЬ СЕССИИ
