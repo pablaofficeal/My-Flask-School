@@ -15,6 +15,9 @@
     </ul>
   {% endif %}
 {% endwith %}
+<style>
+
+</style>
 <form method="POST" action="{{ url_for('oauth_bpp.login') }}">
     <label for="username">Имя пользователя:</label>
     <input type="text" id="username" name="username" required>
