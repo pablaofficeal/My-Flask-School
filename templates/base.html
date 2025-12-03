@@ -4,24 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
 </head>
 <body>
     <div class="main-menu">
         <nav>
             <ul>
                 <li>
-                    <a href="/">
+                    <a href="{{ url_for('home_bpp.index') }}">
                         <span>Главная</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/register">
+                    <a href="{{ url_for('oauth_register_bpp.register') }}">
                         <span>Регистрация</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/login">
+                    <a href="{{ url_for('oauth_bpp.login') }}">
                         <span>Вход</span>
                     </a>
                 </li>
@@ -30,5 +29,9 @@
     </div>
     
     {% block content %}{% endblock %}
+
+    <footer>
+        <p>&copy; 2026 Все права защищены.</p>
+    </footer>
 </body>
 </html>

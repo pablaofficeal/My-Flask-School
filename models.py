@@ -35,12 +35,4 @@ class User(db.Model):
         self.is_admin = True
         db.session.commit()
 
-class Role(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), unique=True, nullable=False)
-    users = db.relationship('User', backref='role', lazy=True)
-    description = db.Column(db.String(200))
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    is_default = db.Column(db.Boolean, default=False)
     
