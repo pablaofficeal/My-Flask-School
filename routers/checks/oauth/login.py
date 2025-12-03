@@ -3,7 +3,7 @@ from flask import Blueprint, render_template, request, redirect, url_for, sessio
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 
-oauth_bpp = Blueprint('oauth_bpp', __name__)
+oauth_bpp = Blueprint('oauth_bpp', __name__, url_prefix='/')
 
 @oauth_bpp.route('/login', methods=['GET', 'POST'])
 def login():
