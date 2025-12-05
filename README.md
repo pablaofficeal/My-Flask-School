@@ -27,18 +27,77 @@
 
 ```
 My-Flask-School/
-├── backend/                    # Основной backend код
-│   ├── app.py                  # Точка входа приложения
-│   ├── config.py               # Конфигурация Flask
-│   ├── models.py               # Модели базы данных
-│   └── routers/                # Маршрутизация (blueprints)
-│       ├── checks/oauth/       # Авторизация и аутентификация
-│       └── home/               # Основные страницы
-├── frontend/                   # Frontend часть
-│   ├── static/css/            # Стили (CSS)
-│   └── templates/             # HTML шаблоны
-├── instance/                   # База данных SQLite
-└── README.md                  # Документация
+    ├── backend
+    │   ├── blueprints
+    │   │   ├── all_bpp.py
+    │   │   ├── errors_handlers.py
+    │   │   └── testing_errors_handlers.py
+    │   ├── handlers
+    │   │   ├── __init__403.py
+    │   │   ├── __init__404.py
+    │   │   ├── __init__405.py
+    │   │   ├── __init__415.py
+    │   │   └── __init__500.py
+    │   ├── models
+    │   │   ├── users
+    │   │   │   └── main_user_db.py
+    │   │   ├── imp.py
+    │   │   └── models_all_rout_imp.py
+    │   ├── routers
+    │   │   ├── checks
+    │   │   │   └── oauth
+    │   │   │       ├── login.py
+    │   │   │       ├── logout.py
+    │   │   │       └── register.py
+    │   │   ├── home
+    │   │   │   ├── homes.py
+    │   │   │   ├── main_home.py
+    │   │   │   └── profile.py
+    │   │   └── swagger_bp.py
+    │   ├── utils
+    │   │   ├── testing
+    │   │   │   ├── forbidden_error_403.py
+    │   │   │   ├── internal_server_error_500.py
+    │   │   │   ├── method_not_allowed_error_405.py
+    │   │   │   ├── not_found_error_404.py
+    │   │   │   └── unsupported_media_type_error_415.py
+    │   │   └── swagger_generator.py
+    │   ├── app.py
+    │   └── config.py
+    ├── frontend
+    │   ├── static
+    │   │   ├── css
+    │   │   │   ├── errors
+    │   │   │   │   └── css
+    │   │   │   │       └── all_css_errors.css
+    │   │   │   ├── mod
+    │   │   │   │   ├── thems-dark.css
+    │   │   │   │   └── thems-light.css
+    │   │   │   └── index.css
+    │   │   └── js
+    │   │       └── index.js
+    │   └── templates
+    │       ├── errors
+    │       │   ├── 403.html
+    │       │   ├── 404.html
+    │       │   ├── 405.html
+    │       │   ├── 415.html
+    │       │   ├── 451.html
+    │       │   └── 500.html
+    │       ├── base.html
+    │       ├── home-base.html
+    │       ├── home.html
+    │       ├── index.html
+    │       ├── login.html
+    │       ├── profile.html
+    │       ├── register.html
+    │       └── swagger.html
+    ├── .gitignore
+    ├── docker-compose.yml
+    ├── Dockerfile
+    ├── README.md
+    └── requirements.txt
+
 ```
 
 ## 🎯 **Функциональность**
