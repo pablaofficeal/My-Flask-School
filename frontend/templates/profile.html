@@ -21,7 +21,7 @@
 <hr>
 
 <h3 class="text-danger">Опасная зона</h3>
-<form method="POST" onsubmit="return confirm('Ты УВЕРЕН? Это нельзя отменить!');">
+<form method="POST" action="#">
     <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
     <input type="hidden" name="delete_account" value="1">
     <input type="hidden" name="confirm_delete" value="yes">
