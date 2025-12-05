@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block content %}
+{% if 'user_id' not in session %}
 <div class="main">
     <h1>Добро пожаловать на главную страницу!</h1>
 </div>
@@ -12,5 +13,17 @@
     <h2>Мы вернулися</h2>
     <p>У нас теперь есть новые функции</p>
 </div>
-{% endblock %}
 
+<div class="content2">
+    <h3>Для тех кто новый</h3>
+    <p>Если вы новый на нашем сайте, то вам стоит зарегистрироваться</p>
+    <a href="{{ url_for('oauth_register_bpp.register') }}">
+        <button>Зарегистрироваться</button>
+    </a>
+</div>
+{% else %}
+<div class="main">
+    <h1>Добро пожаловать {{ user.username }}!</h1>
+</div>
+{% endif %}
+{% endblock %}

@@ -5,5 +5,18 @@
 {% endblock %}
 
 {% block content %}
-<h1>Добро пожаловать, {{ user.username }}!</h1>
+<div class="main">
+    <h1>Добро пожаловать {{ user.username }}!</h1>
+</div>
+
+<div class="context">
+    <div class="modals">
+        <div class="api-token-title">
+            <h2>API-ключ от github</h2>
+        </div>
+        <div class="api-token">
+            <input type="text" id="api-token-input" placeholder="Введите ваш API-ключ от github">
+        </div>
+    </div>
+</div>
 {% endblock %}

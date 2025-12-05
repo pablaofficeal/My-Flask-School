@@ -125,3 +125,20 @@ button:hover {
     color: var(--text-primary);
     text-align: left;
 }
+
+.context {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: var(--bg-card);
+    border-radius: 5px;
+    box-shadow: 0 0 10px var(--shadow);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.modals .api-token input {
+    padding: 5px;
+    margin-top: 5px;
+    width: 100%;
+}
