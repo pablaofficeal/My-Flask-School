@@ -175,7 +175,7 @@ WTF_CSRF_ENABLED = True                 # CSRF защита
 
 ## 👨‍💻 **Автор**
 
-**PablaOfficeal** - *Крутой разработчик*
+**PablaOfficeal**
 
 - 🐙 GitHub: [@PablaOfficeal](https://github.com/PablaOfficeal)
 
