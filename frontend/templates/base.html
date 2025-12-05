@@ -28,11 +28,35 @@
             </ul>
         </nav>
     </div>
+
+    <div class="thems">
+        <!-- Делаем випадающий список для выбора темы -->
+        <select id="theme-select">
+            <option value="dark" selected class="dark-theme">Темная тема</option>
+            <option value="light" selected class="light-theme">Светлая тема</option>
+        </select>
+    </div>
     
     {% block content %}{% endblock %}
 
     <footer>
         <p>&copy; 2026 Все права защищены.</p>
     </footer>
+
+    <script>
+
+        // темы меняем через CSS классы
+        // по умолчанию устанавливаем темную тему
+        document.body.classList.add('dark-theme');
+
+        const themeSelect = document.getElementById('theme-select');
+        themeSelect.addEventListener('change', () => {
+            const selectedTheme = themeSelect.value;
+            document.body.classList.remove('dark-theme', 'light-theme');
+            document.body.classList.add(selectedTheme + '-theme');
+        });
+
+
+    </script>
 </body>
 </html>
