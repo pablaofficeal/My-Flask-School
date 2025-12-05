@@ -1,0 +1,24 @@
+/* static/css/mod/thems-light.css */
+.light-theme {
+    --primary: #0969da;
+    --primary-hover: #1f7ce0;
+    --primary-light: rgba(9, 105, 218, 0.1);
+    --danger: #cf222e;
+    --danger-hover: #d1242f;
+    --danger-light: rgba(207, 34, 46, 0.1);
+    --warning: #9a6700;
+    --warning-hover: #b88b00;
+    --warning-light: rgba(154, 103, 0, 0.1);
+    --info: #0969da;
+    --info-hover: #1f7ce0;
+    --info-light: rgba(9, 105, 218, 0.1);
+    --bg-primary: #ffffff;
+    --bg-secondary: #f6f8fa;
+    --bg-tertiary: #eaeef2;
+    --bg-card: #ffffff;
+    --border: #d0d7de;
+    --text-primary: #24292f;
+    --text-secondary: #57606a;
+    --text-tertiary: #6e7781;
+    --shadow: rgba(0, 0, 0, 0.08);
+}

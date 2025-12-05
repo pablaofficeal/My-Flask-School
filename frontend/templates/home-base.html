@@ -32,14 +32,22 @@
                 </li>
             </ul>
         </nav>
+            <div class="thems">
+        <select id="theme-select">
+            <option value="dark">Темная тема</option>
+            <option value="light">Светлая тема</option>
+        </select>
     </div>
+    </div>
+
+    
 
     {% block content %}{% endblock %}
 
     <footer>
         <p>&copy; 2026 Все права защищены.</p>
     </footer>
-
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
 </body>
 
 </html>

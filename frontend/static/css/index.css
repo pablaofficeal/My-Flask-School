@@ -1,4 +1,5 @@
 @import 'mod/thems-dark.css';
+@import 'mod/thems-light.css';
 
 :root {
     --primary: #238636;
@@ -64,10 +65,6 @@ footer {
     gap: 15px;
 }
 
-.main-menu ul li {
-    display: inline;
-}
-
 .main-menu ul li a {
     color: var(--text-primary);
     text-decoration: none;
@@ -83,6 +80,7 @@ form {
     display: flex;
     flex-direction: column;
     max-width: 300px;
+    margin: 0 auto;
 }
 
 label {

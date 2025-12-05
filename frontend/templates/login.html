@@ -1,4 +1,3 @@
-<!-- templates/login.html -->
 {% extends "base.html" %}
 
 {% block title %}Вход{% endblock %}
@@ -17,7 +16,6 @@
 {% endwith %}
 
 <form method="POST" action="{{ url_for('oauth_bpp.login') }}">
-    <!-- ЭТО ДОЛЖНО БЫТЬ ИМЕННО ТАК — С ДВУМЯ ФИГУРНЫМИ СКОБКАМИ С КАЖДОЙ СТОРОНЫ -->
 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
     <label for="username">Имя пользователя:</label><br>
