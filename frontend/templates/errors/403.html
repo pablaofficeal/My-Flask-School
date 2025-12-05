@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forbidden</title>
+    <link rel="stylesheet" href="/static/css/errors/css/all_errors.css">
+</head>
+
+<body>
+    <div class="error-container">
+        <div class="error-bg">
+            <div class="floating-shape shape-1"></div>
+            <div class="floating-shape shape-2"></div>
+            <div class="floating-shape shape-3"></div>
+        </div>
+
+        <!-- Основной контент -->
+        <div class="error-number glitch" data-text="403">403</div>
+
+        <div class="error-content">
+            <h1>Forbidden</h1>
+            <p>Oops! You don't have permission to access this page. Please contact the administrator if you believe this is an error.</p>
+            <a href="/" class="home-button">Back to Home</a>
+        </div>
+    </div>
+
+    <script>
+        // Добавляем случайные помехи для эффекта глитча
+        document.addEventListener('DOMContentLoaded', function () {
+            const glitch = document.querySelector('.glitch');
+
+            setInterval(() => {
+                glitch.style.transform = `translate(${Math.random() * 4 - 2}px, ${Math.random() * 4 - 2}px)`;
+                setTimeout(() => {
+                    glitch.style.transform = 'translate(0, 0)';
+                }, 100);
+            }, 3000);
+        });
+    </script>
+</body>
+
+</html>
