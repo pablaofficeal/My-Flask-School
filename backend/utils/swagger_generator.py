@@ -14,9 +14,166 @@ class SwaggerGenerator:
                 "version": "1.0.0"
             },
             "basePath": "/",
-            "schemes": ["http"],
-            "paths": {},
-            "definitions": {}
+
+            
+            "schemes": ["http", "https"],
+            "securityDefinitions": {
+                "BearerAuth": {
+                    "type": "apiKey",
+                    "name": "Authorization",
+                    "in": "header",
+                    "description": "Bearer token for authentication"
+                }
+            },
+            "paths": {
+                "/profile": {
+                    "get": {
+                        "summary": "Get user profile",
+                        "description": "Retrieve the profile of the currently authenticated user",
+                        "responses": {
+                            "200": {
+                                "description": "Success",
+                                "schema": {"$ref": "#/definitions/UserProfile"}
+                            }
+                        }
+                    }
+                },
+                "/profile": {
+                    "post": {
+                        "summary": "Update user profile",
+                        "description": "Update the profile of the currently authenticated user",
+                        "parameters": [
+                            {
+                                "name": "profile_data",
+                                "in": "body",
+                                "required": True,
+                                "schema": {"$ref": "#/definitions/UserProfile"}
+                            }
+                        ],
+                        "responses": {
+                            "200": {
+                                "description": "Success",
+                                "schema": {"$ref": "#/definitions/UserProfile"}
+                            }
+                        }
+                    }
+                },
+                "/profile/avatar": {
+                    "post": {
+                        "summary": "Update user avatar",
+                        "description": "Update the avatar of the currently authenticated user",
+                        "parameters": [
+                            {
+                                "name": "avatar",
+                                "in": "formData",
+                                "required": True,
+                                "type": "file"
+                            }
+                        ],
+                        "responses": {
+                            "200": {
+                                "description": "Success",
+                                "schema": {"$ref": "#/definitions/UserProfile"}
+                            }
+                        }
+                    }
+                },
+                "/profile/delete": {
+                    "post": {
+                        "summary": "Delete user account",
+                        "description": "Delete the account of the currently authenticated user",
+                        "parameters": [
+                            {
+                                "name": "confirm_delete",
+                                "in": "formData",
+                                "required": True,
+                                "type": "string"
+                            }
+                        ],
+                        "responses": {
+                            "200": {
+                                "description": "Success",
+                                "schema": {"type": "object"}
+                            }
+                        }
+                    }
+                },
+                "login": {
+                    "post": {
+                        "summary": "User login",
+                        "description": "Authenticate a user and return a token",
+                        "parameters": [
+                            {
+                                "name": "login_data",
+                                "in": "body",
+                                "required": True,
+                                "schema": {"$ref": "#/definitions/LoginData"}
+                            }
+                        ],
+                        "responses": {
+                            "200": {
+                                "description": "Success",
+                                "schema": {"$ref": "#/definitions/LoginResponse"}
+                            }
+                        }
+                    }
+                },
+                "register": {
+                    "post": {
+                        "summary": "User registration",
+                        "description": "Register a new user account",
+                        "parameters": [
+                            {
+                                "name": "register_data",
+                                "in": "body",
+                                "required": True,
+                                "schema": {"$ref": "#/definitions/RegisterData"}
+                            }
+                        ],
+                        "responses": {
+                            "200": {
+                                "description": "Success",
+                                "schema": {"$ref": "#/definitions/UserProfile"}
+                            }
+                        }
+                    }
+                },
+                
+            },
+            "definitions": {
+                "UserProfile": {
+                    "type": "object",
+                    "properties": {
+                        "username": {"type": "string"},
+                        "email": {"type": "string"},
+                        "first_name": {"type": "string"},
+                        "last_name": {"type": "string"},
+                        "phone": {"type": "string"},
+                        "avatar": {"type": "string"}
+                    }
+                },
+                "LoginData": {
+                    "type": "object",
+                    "properties": {
+                        "username": {"type": "string"},
+                        "password": {"type": "string"}
+                    }
+                },
+                "LoginResponse": {
+                    "type": "object",
+                    "properties": {
+                        "token": {"type": "string"}
+                    }
+                },
+                "RegisterData": {
+                    "type": "object",
+                    "properties": {
+                        "username": {"type": "string"},
+                        "email": {"type": "string"},
+                        "password": {"type": "string"},
+                    }
+                },
+            }
         }
     
     def parse_docstring(self, func) -> Dict[str, Any]:
@@ -30,6 +187,34 @@ class SwaggerGenerator:
                 "responses": {
                     "200": {
                         "description": "Success",
+                        "schema": {"type": "object"}
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {"type": "object"}
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {"type": "object"}
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {"type": "object"}
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {"type": "object"}
+                    },
+                    "405": {
+                        "description": "Method Not Allowed",
+                        "schema": {"type": "object"}
+                    },
+                    "415": {
+                        "description": "Unsupported Media Type",
+                        "schema": {"type": "object"}
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
                         "schema": {"type": "object"}
                     }
                 }
