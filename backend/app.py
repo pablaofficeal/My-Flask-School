@@ -1,7 +1,8 @@
 # app.py
 from flask import Flask
 from config import Config
-from models import db
+from models.imp import db
+from models.models_all_rout_imp import *
 from flask_wtf import CSRFProtect
 
 # Импорты с правильной структурой папок
