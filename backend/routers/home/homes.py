@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session, flash
-from models import *
+from models.models_all_rout_imp import User
 
 homes_bpp = Blueprint('homes_bpp', __name__)
 

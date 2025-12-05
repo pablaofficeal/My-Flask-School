@@ -1,7 +1,8 @@
 # routers/home/profile.py
 from flask import Blueprint, render_template, request, redirect, url_for, session, flash
 from flask_wtf.csrf import CSRFProtect
-from models import User, db
+from models.models_all_rout_imp import User
+from models.imp import db
 
 profile_bpp = Blueprint('profile_bpp', __name__)
 

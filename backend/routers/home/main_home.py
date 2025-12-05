@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, session
-from models import *
+from models.models_all_rout_imp import User
 
 home_bpp = Blueprint('home_bpp', __name__)
 

@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session, flash
-from models import *
+from models.models_all_rout_imp import User
+from models.imp import db
 from werkzeug.security import generate_password_hash, check_password_hash
 
 oauth_register_bpp = Blueprint('oauth_register_bpp', __name__, url_prefix='/register')
