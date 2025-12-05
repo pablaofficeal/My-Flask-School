@@ -22,6 +22,9 @@
                         <span>Профиль</span>
                     </a>
                 </li>
+                {% if user.can_view_admin_panel() %}
+                <li><a href="/admin" style="color: var(--secondary-color);">⚙️ Admin Panel</a></li>
+                {% endif %}
                 <li>
                     <a href="{{ url_for('oauth_logout_bpp.logout') }}">
                         <span>Выйти</span>
@@ -29,15 +32,15 @@
                 </li>
             </ul>
         </nav>
-            <div class="thems">
-        <select id="theme-select">
-            <option value="dark">Темная тема</option>
-            <option value="light">Светлая тема</option>
-        </select>
-    </div>
+        <div class="thems">
+            <select id="theme-select">
+                <option value="dark">Темная тема</option>
+                <option value="light">Светлая тема</option>
+            </select>
+        </div>
     </div>
 
-    
+
 
     {% block content %}{% endblock %}
 

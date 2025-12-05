@@ -5,3 +5,4 @@ instance/
 *.db
 *.env
 *admin/
+*admin_bpp.py
