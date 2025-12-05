@@ -128,6 +128,12 @@ class SwaggerGenerator:
                                 "in": "body",
                                 "required": True,
                                 "schema": {"$ref": "#/definitions/RegisterData"}
+                            },
+                            {
+                                "name": "confirm_register",
+                                "in": "formData",
+                                "required": True,
+                                "type": "string"
                             }
                         ],
                         "responses": {
