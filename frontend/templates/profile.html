@@ -17,6 +17,14 @@
   <p><strong>Логин:</strong> {{ user.username }}</p>
   <p><strong>Email:</strong> {{ user.email }}</p>
   <hr>
+  <div class="my-github-repo">
+    <p><strong>Мои репозитории на GitHub:</strong></p>
+    <ul>
+      {% for repo in user.github_repos %}
+      <li><a href="{{ repo.html_url }}" target="_blank">{{ repo.name }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
 
   <h3 class="text-danger">Опасная зона</h3>
   <form method="POST" action="#">
