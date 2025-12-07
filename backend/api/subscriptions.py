@@ -1,11 +1,13 @@
-from flask import Blueprint, request, jsonify, current_app
-from models.subscription import *
+from flask import Blueprint, request, jsonify, current_app, session
+from models.models_all_rout_imp import *
 from models.users.main_user_db import User
 from services.subscription_service import subscription_service
 from services.transaction_service import transaction_service
 from utils.logs_service import init_logger
 from datetime import datetime
 import traceback
+
+# JWT убран нахуй - теперь используем session-based аутентификацию
 
 
 subscriptions_bp = Blueprint('subscriptions', __name__)
@@ -32,6 +34,11 @@ def get_subscription_plans():
             'success': False,
             'error': 'Internal server error'
         }), 500
+
+# JWT ПОЛНОСТЬЮ УБРАН НАХУЙ ИЗ ВСЕГО ФАЙЛА!
+# ВСЕ ДЕКОРАТОРЫ @jwt_required() УДАЛЕНЫ!
+# ВСЕ get_jwt_identity() ЗАМЕНЕНЫ НА session['user_id']!
+# ТЕПЕРЬ ИСПОЛЬЗУЕТСЯ ТОЛЬКО SESSION-BASED АУТЕНТИФИКАЦИЯ!
 
 
 @subscriptions_bp.route('/plans/<int:plan_id>', methods=['GET'])
@@ -62,11 +69,17 @@ def get_subscription_plan(plan_id):
 
 
 @subscriptions_bp.route('/my-subscription', methods=['GET'])
-@jwt_required()
 def get_my_subscription():
     """Получить подписку текущего пользователя"""
     try:
-        user_id = get_jwt_identity()
+        # Получаем user_id из сессии вместо JWT
+        if 'user_id' not in session:
+            return jsonify({
+                'success': False,
+                'error': 'User not authenticated'
+            }), 401
+            
+        user_id = session['user_id']
         
         # Проверить и обновить статус подписки
         subscription_service.check_and_update_subscription_status(user_id)
@@ -98,11 +111,17 @@ def get_my_subscription():
 
 
 @subscriptions_bp.route('/my-subscription/assign', methods=['POST'])
-@jwt_required()
 def assign_subscription():
     """Назначить подписку пользователю"""
     try:
-        user_id = get_jwt_identity()
+        # Получаем user_id из сессии вместо JWT
+        if 'user_id' not in session:
+            return jsonify({
+                'success': False,
+                'error': 'User not authenticated'
+            }), 401
+            
+        user_id = session['user_id']
         data = request.get_json()
         
         plan_id = data.get('plan_id')
@@ -149,11 +168,17 @@ def assign_subscription():
 
 
 @subscriptions_bp.route('/my-subscription/cancel', methods=['POST'])
-@jwt_required()
 def cancel_subscription():
     """Отменить подписку пользователя"""
     try:
-        user_id = get_jwt_identity()
+        # Получаем user_id из сессии вместо JWT
+        if 'user_id' not in session:
+            return jsonify({
+                'success': False,
+                'error': 'User not authenticated'
+            }), 401
+            
+        user_id = session['user_id']
         data = request.get_json()
         
         reason = data.get('reason')
@@ -191,11 +216,17 @@ def cancel_subscription():
 
 
 @subscriptions_bp.route('/my-subscription/renew', methods=['POST'])
-@jwt_required()
 def renew_subscription():
     """Продлить подписку пользователя"""
     try:
-        user_id = get_jwt_identity()
+        # Получаем user_id из сессии вместо JWT
+        if 'user_id' not in session:
+            return jsonify({
+                'success': False,
+                'error': 'User not authenticated'
+            }), 401
+            
+        user_id = session['user_id']
         
         subscription = subscription_service.get_user_subscription(user_id)
         if not subscription:
@@ -227,11 +258,17 @@ def renew_subscription():
 
 
 @subscriptions_bp.route('/my-limits', methods=['GET'])
-@jwt_required()
 def get_my_limits():
     """Получить лимиты текущего пользователя"""
     try:
-        user_id = get_jwt_identity()
+        # Получаем user_id из сессии вместо JWT
+        if 'user_id' not in session:
+            return jsonify({
+                'success': False,
+                'error': 'User not authenticated'
+            }), 401
+            
+        user_id = session['user_id']
         
         limits = subscription_service.get_user_limits(user_id)
         
@@ -249,11 +286,17 @@ def get_my_limits():
 
 
 @subscriptions_bp.route('/track-usage', methods=['POST'])
-@jwt_required()
 def track_usage():
     """Отследить использование ресурсов"""
     try:
-        user_id = get_jwt_identity()
+        # Получаем user_id из сессии вместо JWT
+        if 'user_id' not in session:
+            return jsonify({
+                'success': False,
+                'error': 'User not authenticated'
+            }), 401
+            
+        user_id = session['user_id']
         data = request.get_json()
         
         usage_type = data.get('usage_type')
@@ -301,11 +344,17 @@ def track_usage():
 
 
 @subscriptions_bp.route('/history', methods=['GET'])
-@jwt_required()
 def get_subscription_history():
     """Получить историю подписки текущего пользователя"""
     try:
-        user_id = get_jwt_identity()
+        # Получаем user_id из сессии вместо JWT
+        if 'user_id' not in session:
+            return jsonify({
+                'success': False,
+                'error': 'User not authenticated'
+            }), 401
+            
+        user_id = session['user_id']
         limit = request.args.get('limit', 50, type=int)
         
         history = SubscriptionHistory.get_user_history(user_id, limit=limit)
@@ -325,11 +374,17 @@ def get_subscription_history():
 
 # Транзакции
 @subscriptions_bp.route('/transactions', methods=['GET'])
-@jwt_required()
 def get_transactions():
     """Получить транзакции текущего пользователя"""
     try:
-        user_id = get_jwt_identity()
+        # Получаем user_id из сессии вместо JWT
+        if 'user_id' not in session:
+            return jsonify({
+                'success': False,
+                'error': 'User not authenticated'
+            }), 401
+            
+        user_id = session['user_id']
         limit = request.args.get('limit', 20, type=int)
         offset = request.args.get('offset', 0, type=int)
         
@@ -361,11 +416,17 @@ def get_transactions():
 
 
 @subscriptions_bp.route('/transactions', methods=['POST'])
-@jwt_required()
 def create_transaction():
     """Создать транзакцию"""
     try:
-        user_id = get_jwt_identity()
+        # Получаем user_id из сессии вместо JWT
+        if 'user_id' not in session:
+            return jsonify({
+                'success': False,
+                'error': 'User not authenticated'
+            }), 401
+            
+        user_id = session['user_id']
         data = request.get_json()
         
         plan_id = data.get('plan_id')
@@ -422,11 +483,17 @@ def create_transaction():
 
 
 @subscriptions_bp.route('/transactions/<int:transaction_id>', methods=['GET'])
-@jwt_required()
 def get_transaction(transaction_id):
     """Получить детали транзакции"""
     try:
-        user_id = get_jwt_identity()
+        # Получаем user_id из сессии вместо JWT
+        if 'user_id' not in session:
+            return jsonify({
+                'success': False,
+                'error': 'User not authenticated'
+            }), 401
+            
+        user_id = session['user_id']
         
         transaction = transaction_service.get_transaction(transaction_id)
         if not transaction or transaction.user_id != user_id:
@@ -449,11 +516,17 @@ def get_transaction(transaction_id):
 
 
 @subscriptions_bp.route('/transactions/<int:transaction_id>/process', methods=['POST'])
-@jwt_required()
 def process_transaction(transaction_id):
     """Обработать транзакцию (оплатить)"""
     try:
-        user_id = get_jwt_identity()
+        # Получаем user_id из сессии вместо JWT
+        if 'user_id' not in session:
+            return jsonify({
+                'success': False,
+                'error': 'User not authenticated'
+            }), 401
+            
+        user_id = session['user_id']
         data = request.get_json()
         
         transaction = transaction_service.get_transaction(transaction_id)
@@ -491,11 +564,17 @@ def process_transaction(transaction_id):
 
 
 @subscriptions_bp.route('/transactions/<int:transaction_id>/refund', methods=['POST'])
-@jwt_required()
 def refund_transaction(transaction_id):
     """Вернуть транзакцию"""
     try:
-        user_id = get_jwt_identity()
+        # Получаем user_id из сессии вместо JWT
+        if 'user_id' not in session:
+            return jsonify({
+                'success': False,
+                'error': 'User not authenticated'
+            }), 401
+            
+        user_id = session['user_id']
         data = request.get_json()
         
         transaction = transaction_service.get_transaction(transaction_id)

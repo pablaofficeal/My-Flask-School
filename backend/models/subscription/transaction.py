@@ -82,7 +82,7 @@ class Transaction(db.Model):
     notes = db.Column(db.Text)  # Внутренние примечания
     
     # Метаданные
-    metadata = db.Column(db.JSON)  # Дополнительные данные
+    extra_data = db.Column(db.JSON)  # Дополнительные данные
     
     # Связи
     plan = db.relationship('SubscriptionPlan', backref='transactions', lazy=True)
@@ -137,7 +137,7 @@ class Transaction(db.Model):
             'refunded_at': self.refunded_at.isoformat() if self.refunded_at else None,
             'description': self.description,
             'failure_reason': self.failure_reason,
-            'metadata': self.metadata,
+            'metadata': self.extra_data,
             'plan': self.plan.to_dict() if self.plan else None
         }
     

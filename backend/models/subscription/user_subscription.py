@@ -1,6 +1,7 @@
 from models.imp import db
 from datetime import datetime, timedelta
 import enum
+from sqlalchemy import Numeric
 
 
 class SubscriptionStatus(enum.Enum):
@@ -40,7 +41,7 @@ class UserSubscription(db.Model):
     auto_renew = db.Column(db.Boolean, default=True)  # Автоматическое продление
     billing_cycle = db.Column(db.String(20), default='monthly')  # monthly, yearly
     currency = db.Column(db.String(3), default='USD')
-    price_paid = db.Column(db.Decimal(10, 2))  # Фактическая цена оплаты
+    price_paid = db.Column(Numeric(10, 2))  # Фактическая цена оплаты
     
     # Использование
     bots_created = db.Column(db.Integer, default=0)  # Количество созданных ботов

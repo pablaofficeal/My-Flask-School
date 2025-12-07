@@ -1,5 +1,6 @@
 from models.imp import db
 from datetime import datetime
+from sqlalchemy import Numeric
 
 
 class SubscriptionPlan(db.Model):
@@ -10,7 +11,7 @@ class SubscriptionPlan(db.Model):
     name = db.Column(db.String(100), nullable=False, unique=True)  # free, basic, premium, business
     display_name = db.Column(db.String(200), nullable=False)
     description = db.Column(db.Text)
-    price = db.Column(db.Decimal(10, 2), nullable=False)  # Цена в валюте
+    price = db.Column(Numeric(10, 2), nullable=False)  # Цена в валюте
     currency = db.Column(db.String(3), default='USD')
     billing_cycle = db.Column(db.String(20), nullable=False)  # monthly, yearly, lifetime
     

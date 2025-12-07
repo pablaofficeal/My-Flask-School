@@ -45,7 +45,7 @@ class SubscriptionHistory(db.Model):
     
     # Дополнительная информация
     description = db.Column(db.Text)  # Описание изменения
-    metadata = db.Column(db.JSON)  # Дополнительные метаданные
+    extra_data = db.Column(db.JSON)  # Дополнительные метаданные
     ip_address = db.Column(db.String(45))  # IP адрес пользователя
     user_agent = db.Column(db.String(500))  # User agent
     
@@ -74,7 +74,7 @@ class SubscriptionHistory(db.Model):
             'new_status': self.new_status,
             'new_end_date': self.new_end_date.isoformat() if self.new_end_date else None,
             'description': self.description,
-            'metadata': self.metadata,
+            'metadata': self.extra_data,
             'ip_address': self.ip_address,
             'user_agent': self.user_agent,
             'created_at': self.created_at.isoformat(),
@@ -85,7 +85,7 @@ class SubscriptionHistory(db.Model):
     @staticmethod
     def log_action(user_id, action, subscription_id=None, old_plan_id=None, new_plan_id=None, 
                    old_status=None, new_status=None, old_end_date=None, new_end_date=None,
-                   description=None, metadata=None, ip_address=None, user_agent=None):
+                   description=None, extra_data=None, ip_address=None, user_agent=None):
         """Статический метод для логирования действия"""
         
         history_entry = SubscriptionHistory(
@@ -99,7 +99,7 @@ class SubscriptionHistory(db.Model):
             old_end_date=old_end_date,
             new_end_date=new_end_date,
             description=description,
-            metadata=metadata,
+            extra_data=extra_data,
             ip_address=ip_address,
             user_agent=user_agent
         )

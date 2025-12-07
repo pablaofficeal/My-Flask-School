@@ -1,6 +1,7 @@
 from models.imp import db
-from datetime import datetime
+from datetime import datetime, timedelta
 import enum
+from sqlalchemy import Numeric
 
 
 class UsageType(enum.Enum):
@@ -42,11 +43,11 @@ class UsageTracker(db.Model):
     
     # Количественные показатели
     quantity = db.Column(db.Integer, default=1)  # Количество использований
-    cost = db.Column(db.Decimal(10, 4), default=0)  # "Стоимость" в единицах лимита
+    cost = db.Column(Numeric(10, 4), default=0)  # "Стоимость" в единицах лимита
     size_bytes = db.Column(db.BigInteger, default=0)  # Размер в байтах (для хранилища)
     
     # Метаданные
-    metadata = db.Column(db.JSON)  # Дополнительные данные
+    extra_data = db.Column(db.JSON)  # Дополнительные данные
     tags = db.Column(db.String(500))  # Теги для фильтрации
     
     # Геолокация и клиент
@@ -86,7 +87,7 @@ class UsageTracker(db.Model):
             'quantity': self.quantity,
             'cost': float(self.cost) if self.cost else 0,
             'size_bytes': self.size_bytes,
-            'metadata': self.metadata,
+            'metadata': self.extra_data,
             'tags': self.tags.split(',') if self.tags else [],
             'ip_address': self.ip_address,
             'user_agent': self.user_agent,
@@ -129,7 +130,7 @@ class UsageTracker(db.Model):
     
     @staticmethod
     def track_usage(user_id, usage_type, quantity=1, cost=0, resource_id=None, 
-                   resource_type=None, action=None, metadata=None, subscription_id=None,
+                   resource_type=None, action=None, extra_data=None, subscription_id=None,
                    limit_id=None, ip_address=None, user_agent=None, execution_time_ms=None,
                    status='success', error_message=None):
         """Статический метод для отслеживания использования"""
@@ -144,7 +145,7 @@ class UsageTracker(db.Model):
             resource_id=resource_id,
             resource_type=resource_type,
             action=action,
-            metadata=metadata,
+            extra_data=extra_data,
             ip_address=ip_address,
             user_agent=user_agent,
             execution_time_ms=execution_time_ms,
