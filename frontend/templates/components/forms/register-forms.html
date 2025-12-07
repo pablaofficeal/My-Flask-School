@@ -38,20 +38,10 @@
 
             <div class="divider">
                 <div class="divider-line"></div>
-                <div class="divider-text">or</div>
+                <div class="divider-text">или</div>
                 <div class="divider-line"></div>
             </div>
-
-            <div class="social-login">
-                <a href="/auth/google" class="social-btn google-btn">
-                    <i class="fab fa-google"></i> Регистрация с Google
-                </a>
-
-                <a href="/auth/github" class="social-btn github-btn">
-                    <i class="fab fa-github"></i> Регистрация с GitHub
-                </a>
-            </div>
-
+            {% include 'components/forms/buttons-register.html' %}
         </form>
     </div>
 </div>

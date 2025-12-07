@@ -2,34 +2,35 @@
 
 <div class="login-section">
         <div class="login-container">
-            <h2 class="login-title">Login</h2>
+            <h2 class="login-title">Вход</h2>
             <form method="POST" action="{{ url_for('oauth_bpp.login') }}">
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <div class="form-group">
-                    <label class="form-label" for="username">Username</label>
+                    <label class="form-label" for="username">Имя пользователя</label>
                     <input type="text" id="username" name="username" class="form-input"
-                        placeholder="Enter your username" required>
+                        placeholder="Введите ваше имя пользователя" required>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" for="password">Password</label>
+                    <label class="form-label" for="password">Пароль</label>
                     <div class="password-container">
                         <input type="password" id="password" name="password" class="form-input"
-                            placeholder="Create a password" required>
+                            placeholder="Создайте пароль" required>
                         <button type="button" class="toggle-password" id="togglePassword">
                             <i class="far fa-eye"></i>
                         </button>
                     </div>
                 </div>
 
-                <button type="submit" class="login-btn">Login</button>
+                <button type="submit" class="login-btn">Войти</button>
 
                 <div class="divider">
                     <div class="divider-line"></div>
-                    <div class="divider-text">or</div>
+                    <div class="divider-text">или</div>
                     <div class="divider-line"></div>
                 </div>
-                {% include 'components/buttons-login.html' %}
+                {% include 'components/forms/buttons-login.html' %}
+                <p>Нет аккаунта? <a href="{{ url_for('oauth_register_bpp.register') }}">Зарегистрироваться</a></p>
             </form>
         </div>
     </div>

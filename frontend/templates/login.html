@@ -4,7 +4,6 @@
 
 {% block content %}
 <h1>Вход в систему</h1>
-
 {% with messages = get_flashed_messages(with_categories=true) %}
 {% if messages %}
 <div class="flashes">
@@ -15,5 +14,4 @@
 {% endif %}
 {% endwith %}
 {% include 'components/forms/forms.html' %}
-<p>Ещё нет аккаунта? <a href="{{ url_for('oauth_register_bpp.register') }}">Зарегистрироваться</a></p>
 {% endblock %}
