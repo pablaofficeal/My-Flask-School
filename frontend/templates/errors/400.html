@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forbidden</title>
+    <link rel="stylesheet" href="/static/css/errors/css/all_css_errors.css">
+</head>
+
+<body>
+    <div class="error-container">
+        <div class="error-bg">
+            <div class="floating-shape shape-1"></div>
+            <div class="floating-shape shape-2"></div>
+            <div class="floating-shape shape-3"></div>
+        </div>
+
+        <!-- Основной контент -->
+        <div class="error-number glitch" data-text="400">400</div>
+
+        <div class="error-content">
+            <h1>Bad Request</h1>
+            <p>Your request was not valid. Please check your input and try again.</p>
+            <a href="/" class="home-button">Back to Home</a>
+        </div>
+    </div>
+
+    <script>
+        // Добавляем случайные помехи для эффекта глитча
+        document.addEventListener('DOMContentLoaded', function () {
+            const glitch = document.querySelector('.glitch');
+
+            setInterval(() => {
+                glitch.style.transform = `translate(${Math.random() * 4 - 2}px, ${Math.random() * 4 - 2}px)`;
+                setTimeout(() => {
+                    glitch.style.transform = 'translate(0, 0)';
+                }, 100);
+            }, 3000);
+        });
+    </script>
+</body>
+
+</html>
