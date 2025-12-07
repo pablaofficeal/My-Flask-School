@@ -20,7 +20,7 @@
                 {% else %}
                 <li><a href="/home"><span>Дажборт</span></a></li>
                 <li><a href="/profile"><span>Профиль</span></a></li>
-                {% if user.can_view_admin_panel() %}
+                {% if session.get('is_admin', False) %}
                 <li><a href="/admin">⚙️ Admin Panel</a></li>
                 {% endif %}
                 <li><a href="/logout"><span>Выйти</span></a></li>

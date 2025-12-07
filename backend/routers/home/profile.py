@@ -15,11 +15,7 @@ def profile():
     user = User.query.get(session['user_id'])
 
     if request.method == 'POST':
-        # ЗАЩИТА ОТ CSRF — ОБЯЗАТЕЛЬНО!
-        if request.form.get('csrf_token') != session.get('csrf_token'):
-            flash('Недействительный CSRF-токен.', 'danger')
-            return redirect(url_for('profile_bpp.profile'))
-
+        # Обработка удаления аккаунта
         if request.form.get('confirm_delete') == 'yes':
             db.session.delete(user)
             db.session.commit()
@@ -27,4 +23,4 @@ def profile():
             flash('Аккаунт удалён навсегда.', 'success')
             return redirect(url_for('home_bpp.index'))
 
-    return render_template('profile.html', user=user, csrf_token=session.get('csrf_token', ''))
+    return render_template('profile.html', user=user)

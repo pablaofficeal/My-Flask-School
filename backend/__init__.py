@@ -1,0 +1,5 @@
+from blueprints.all_bpp import register_all_blueprints
+from blueprints.testing_errors_handlers import register_testing_error_handlers
+from blueprints.errors_handlers import register_error_handlers
+from blueprints.admin_bpp import register_admin_routes
+from blueprints.api_bpp import register_api_blueprints
