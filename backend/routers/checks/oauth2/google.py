@@ -20,7 +20,7 @@ google_bp = make_google_blueprint(
     redirect_url="/google_login/callback",
     reprompt_consent=True  # всегда запрашивает токен заново
 )
-oauth2_bpp.register_blueprint(google_bp, url_prefix="/google_login")
+oauth2_bpp.register_blueprint(google_bp)
 
 # Добавляем маршрут для инициации Google OAuth с сохранением контекста
 @oauth2_bpp.route('/google_login')

@@ -19,4 +19,4 @@ def register_all_blueprints(app):
     app.register_blueprint(profile_bpp)
     app.register_blueprint(swagger_bpp)
     app.register_blueprint(github_oauth_bp)
-    app.register_blueprint(oauth2_bpp, url_prefix='/oauth2')
+    app.register_blueprint(oauth2_bpp)
