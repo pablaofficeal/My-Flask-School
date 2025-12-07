@@ -14,6 +14,9 @@ class Config:
     SESSION_COOKIE_SAMESITE = 'Lax'
     WTF_CSRF_ENABLED = True
     WTF_CSRF_TIME_LIMIT = None
+    
+    # Отключаем встроенное логирование исключений Flask
+    PROPAGATE_EXCEPTIONS = False
 
     GITHUB_CLIENT_ID = os.getenv('GITHUB_CLIENT_ID')
     GITHUB_CLIENT_SECRET = os.getenv('GITHUB_CLIENT_SECRET')
