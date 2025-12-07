@@ -52,14 +52,18 @@ footer {
     color: var(--text-primary);
     text-align: center;
     padding: 10px 0;
-    position: fixed;
     width: 100%;
-    bottom: 0;
+    position: relative;
+    top: 100%;
+    left: 0;
 }
 
 .main-menu {
-    background-color: var(--bg-secondary);
     padding: 10px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
 }
 
 .main-menu ul {

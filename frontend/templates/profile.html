@@ -12,10 +12,290 @@
 {% endfor %}
 {% endif %}
 {% endwith %}
+<style>
+  .profile-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
 
+  .nav-menu {
+    background: var(--menu-bg);
+    backdrop-filter: blur(20px);
+    border-radius: 50px;
+    padding: 1rem 2rem;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .nav-links {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+  }
+
+  .nav-links a:hover,
+  .nav-links a.active {
+    background: var(--gradient-primary);
+    transform: translateY(-2px);
+  }
+
+  .profile-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    margin-bottom: 2rem;
+  }
+
+  .profile-header {
+    background: var(--gradient-primary);
+    padding: 2rem;
+    color: white;
+  }
+
+  .profile-body {
+    padding: 2rem;
+  }
+
+  .status-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-left: 0.5rem;
+  }
+
+  .status-enabled {
+    background: var(--accent-secondary);
+    color: #000;
+  }
+
+  .status-disabled {
+    background: #dc3545;
+    color: white;
+  }
+
+  .twofa-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 15px;
+    margin: 1.5rem 0;
+  }
+
+  .twofa-info {
+    flex: 1;
+  }
+
+  .danger-zone {
+    background: rgba(220, 53, 69, 0.1);
+    border: 1px solid rgba(220, 53, 69, 0.3);
+    border-radius: 15px;
+    padding: 2rem;
+    margin-top: 2rem;
+  }
+
+  .danger-header {
+    text-align: center;
+    color: #dc3545;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+    font-weight: 500;
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: var(--text-color);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+
+  .form-input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 20px rgba(255, 0, 110, 0.2);
+  }
+
+  .btn {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+  }
+
+  .btn-success {
+    background: var(--gradient-secondary);
+    color: white;
+  }
+
+  .btn-warning {
+    background: linear-gradient(135deg, #ffd166, #ef476f);
+    color: white;
+  }
+
+  .btn-primary {
+    background: var(--gradient-primary);
+    color: white;
+  }
+
+  .btn-danger {
+    background: linear-gradient(135deg, #ef476f, #ff006e);
+    color: white;
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(255, 0, 110, 0.3);
+  }
+
+  .modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal.active {
+    display: flex;
+  }
+
+  .modal-content {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 2rem;
+    max-width: 500px;
+    width: 90%;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+  }
+
+  .modal-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .alert {
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    position: relative;
+  }
+
+  .alert-warning {
+    background: rgba(255, 193, 7, 0.2);
+    border: 1px solid rgba(255, 193, 7, 0.5);
+    color: #ffc107;
+  }
+
+  .alert-success {
+    background: rgba(40, 167, 69, 0.2);
+    border: 1px solid rgba(40, 167, 69, 0.5);
+    color: #28a745;
+  }
+
+  .alert-danger {
+    background: rgba(220, 53, 69, 0.2);
+    border: 1px solid rgba(220, 53, 69, 0.5);
+    color: #dc3545;
+  }
+
+  .close-btn {
+    background: none;
+    border: none;
+    color: inherit;
+    font-size: 1.2rem;
+    cursor: pointer;
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+
+  .floating-alert {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1050;
+    min-width: 300px;
+    display: none;
+  }
+</style>
 <div class="profile-info">
-  <p><strong>Логин:</strong> {{ user.username }}</p>
-  <p><strong>Email:</strong> {{ user.email }}</p>
+  <div class="profile-header">
+
+    <h3>👤 Профиль пользователя</h3>
+    <p>Статус: <span id="user-status" class="status-badge status-enabled">Загрузка...</span></p>
+    <style>
+      .status-badge {
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        display: inline-block;
+        text-align: center;
+        width: 80px;
+      }
+
+      .status-enabled {
+        background: linear-gradient(135deg, #28a745, #218838);
+        color: white;
+      }
+
+      .status-disabled {
+        background: linear-gradient(135deg, #dc3545, #c82333);
+        color: white;
+      }
+    </style>
+  </div>
+
+  <div class="profile-body">
+    <h4>Привет, {{ user.username }}!</h4>
+    <p>Email: {{ user.email }}</p>
+    <hr style="border-color: rgba(255,255,255,0.1); margin: 1.5rem 0;">
+  </div>
   <hr>
   <div class="my-github-repo">
     <p><strong>Мои репозитории на GitHub:</strong></p>
@@ -26,6 +306,7 @@
     </ul>
   </div>
   {% include 'components/profile/danger-zone.html' %}
+  {% include 'components/profile/delete-account.html' %}
 </div>
-
+<script src="{{ url_for('static', filename='js/status.js') }}"></script>
 {% endblock %}

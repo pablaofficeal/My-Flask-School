@@ -1,0 +1,14 @@
+{% block content_delete_account %}
+
+<div class="form-section" style="margin-top: 2rem;">
+    <h5>Удалить аккаунт</h5>
+    <form id="delete-account-form" method="POST" action="/delete-account">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="form-group">
+            <label for="password" class="form-label">Пароль для подтверждения</label>
+            <input type="password" class="form-input" id="password" name="password" required>
+        </div>
+        <button type="submit" class="btn btn-danger">Удалить аккаунт</button>
+    </form>
+</div>
+{% endblock %}
