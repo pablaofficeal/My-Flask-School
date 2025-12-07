@@ -1,0 +1,58 @@
+{% block register_form %}
+<div class="register-section">
+        <div class="register-container">
+            <h2 class="register-title">Create Account</h2>
+
+<form method="POST" action="{{ url_for('oauth_register_bpp.register') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <div class="form-group">
+                    <label class="form-label" for="username">Имя пользователя</label>
+                    <input type="text" id="username" name="username" class="form-input" placeholder="Enter your username" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="email">Email</label>
+                    <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="password">Пароль</label>
+                    <div class="password-container">
+                        <input type="password" id="password" name="password" class="form-input" placeholder="Create a password"
+                            required>
+                        <button type="button" class="toggle-password" id="togglePassword">
+                            <i class="far fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="agreeTerms" class="checkbox-input" required>
+                    <label for="agreeTerms" class="checkbox-label">
+                        Я согласен с <a href="#">Политикой конфиденциальности</a>
+                    </label>
+                </div>
+
+                <button type="submit" class="register-btn">Создать аккаунт</button>
+                
+                <div class="divider">
+                    <div class="divider-line"></div>
+                    <div class="divider-text">or</div>
+                    <div class="divider-line"></div>
+                </div>
+
+                <div class="social-login">
+                    <a href="/auth/google" class="social-btn google-btn">
+                        <i class="fab fa-google"></i> Sign up with Google
+                    </a>
+
+                    <a href="/auth/github" class="social-btn github-btn">
+                        <i class="fab fa-github"></i> Sign up with GitHub
+                    </a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

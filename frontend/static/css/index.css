@@ -1,6 +1,8 @@
 @import 'mod/thems-dark.css';
 @import 'mod/thems-light.css';
 @import 'mod/login.css';
+@import 'mod/register.css';
+
 :root {
     --primary: #238636;
     --primary-hover: #2ea043;
