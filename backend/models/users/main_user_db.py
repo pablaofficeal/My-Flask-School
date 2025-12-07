@@ -2,6 +2,7 @@ from models.imp import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(150), unique=True, nullable=False)
@@ -12,6 +13,14 @@ class User(db.Model):
     last_login = db.Column(db.DateTime)
     role = db.Column(db.String(20), default='user')  # user, moderator, admin, super_admin
 
+    subscription_type = db.Column(db.String(20), default='free')  # free, premium, business
+    subscription_expires = db.Column(db.DateTime)
+
+    # Связь с транзакциями
+    transactions = db.relationship('Transaction', backref='user', lazy=True)
+
+    # Связь с лимитами
+    limits = db.relationship('Limit', backref='user', lazy=True)
 
     def __repr__(self):
         return f"<User {self.username}>"
