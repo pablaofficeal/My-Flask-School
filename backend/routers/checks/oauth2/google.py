@@ -61,7 +61,7 @@ def google_callback():
 
     if not email:
         flash("Google не вернул email.", 'error')
-        return redirect(url_for('login_bpp.login'))
+        return redirect(url_for('oauth_bpp.login'))
 
     # Получаем действие (login или register) из сессии
     action = session.pop('google_action', 'login')

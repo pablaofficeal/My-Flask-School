@@ -59,7 +59,7 @@ def github_callback():
     if not state or state != session.get('github_state'):
         current_app.logger.error(f'GitHub OAuth: State mismatch! Expected: {session.get("github_state")}, Got: {state}')
         flash('Ошибка безопасности. Попробуйте войти снова.', 'error')
-        return redirect(url_for('login_bpp.login'))
+        return redirect(url_for('oauth_bpp.login'))
     
     # Очищаем state из сессии
     session.pop('github_state', None)
@@ -70,7 +70,7 @@ def github_callback():
     if not code:
         current_app.logger.error('GitHub OAuth: No authorization code received')
         flash('GitHub авторизация не удалась.', 'error')
-        return redirect(url_for('login_bpp.login'))
+        return redirect(url_for('oauth_bpp.login'))
     
     # Обмениваем код на access token
     token_data = {
@@ -93,12 +93,12 @@ def github_callback():
         
         if 'error' in token_json:
             flash(f'Ошибка получения токена: {token_json.get("error_description", "Unknown error")}', 'error')
-            return redirect(url_for('login_bpp.login'))
+            return redirect(url_for('oauth_bpp.login'))
         
         access_token = token_json.get('access_token')
         if not access_token:
             flash('Не удалось получить токен доступа от GitHub.', 'error')
-            return redirect(url_for('login_bpp.login'))
+            return redirect(url_for('oauth_bpp.login'))
         
         # Получаем информацию о пользователе
         user_headers = {
@@ -134,7 +134,7 @@ def github_callback():
         
         if not primary_email:
             flash('GitHub не предоставил ваш email. Пожалуйста, убедитесь, что ваш email публичен в настройках GitHub.', 'error')
-            return redirect(url_for('login_bpp.login'))
+            return redirect(url_for('oauth_bpp.login'))
         
         # Получаем данные пользователя
         github_id = user_data.get('id')
@@ -197,7 +197,7 @@ def github_callback():
         
     except requests.exceptions.RequestException as e:
         flash(f'Ошибка при связи с GitHub: {str(e)}', 'error')
-        return redirect(url_for('login_bpp.login'))
+        return redirect(url_for('oauth_bpp.login'))
     except Exception as e:
         flash(f'Произошла ошибка: {str(e)}', 'error')
-        return redirect(url_for('login_bpp.login'))
+        return redirect(url_for('oauth_bpp.login'))
