@@ -14,26 +14,26 @@
 </div>
 {% endif %}
 {% endwith %}
+<div class="login-form">
+  <form method="POST" action="{{ url_for('oauth_bpp.login') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
-<form method="POST" action="{{ url_for('oauth_bpp.login') }}">
-  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label for="username">Имя пользователя:</label><br>
+    <input type="text" id="username" name="username" required autofocus><br><br>
 
-  <label for="username">Имя пользователя:</label><br>
-  <input type="text" id="username" name="username" required autofocus><br><br>
+    <label for="password">Пароль:</label><br>
+    <input type="password" id="password" name="password" required><br><br>
 
-  <label for="password">Пароль:</label><br>
-  <input type="password" id="password" name="password" required><br><br>
+    <button type="submit">Войти</button>
 
-  <button type="submit">Войти</button>
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-text">or</div>
+      <div class="divider-line"></div>
+    </div>
 
-  <div class="divider">
-    <div class="divider-line"></div>
-    <div class="divider-text">or</div>
-    <div class="divider-line"></div>
-  </div>
-
-  {% include 'components/buttons-login.html' %}
-</form>
-
+    {% include 'components/buttons-login.html' %}
+  </form>
+</div>
 <p>Ещё нет аккаунта? <a href="{{ url_for('oauth_register_bpp.register') }}">Зарегистрироваться</a></p>
 {% endblock %}

@@ -38,9 +38,7 @@
 
     {% block content %}{% endblock %}
 
-    <footer>
-        <p>&copy; 2026 Все права защищены.</p>
-    </footer>
+    {% include 'components/footers-components.html' %}
 
     <script src="{{ url_for('static', filename='js/index.js') }}"></script>
 </body>

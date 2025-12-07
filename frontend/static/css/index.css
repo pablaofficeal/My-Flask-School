@@ -1,6 +1,6 @@
 @import 'mod/thems-dark.css';
 @import 'mod/thems-light.css';
-
+@import 'mod/login.css';
 :root {
     --primary: #238636;
     --primary-hover: #2ea043;
@@ -77,21 +77,6 @@ footer {
     background-color: var(--primary-light);
 }
 
-form {
-    display: flex;
-    flex-direction: column;
-    max-width: 300px;
-    margin: 0 auto;
-}
-
-label {
-    margin-top: 10px;
-}
-
-input {
-    padding: 5px;
-    margin-top: 5px;
-}
 
 button {
     margin-top: 15px;
