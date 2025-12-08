@@ -204,6 +204,7 @@ services:
 
 volumes:
   db_data:
+  redis_data:
   grafana_data:
   loki_data:
   prometheus_data:
