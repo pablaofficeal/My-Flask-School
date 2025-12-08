@@ -4,3 +4,5 @@ flask-wtf
 python-dotenv
 psycopg2-binary
 flask_limiter
+requests
+flask_dance
