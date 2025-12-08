@@ -47,7 +47,7 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./nginx/prog.conf:/etc/nginx/conf.d/default.conf
     depends_on:
-      - app
+      - backend
 
 
   regis:
@@ -130,7 +130,7 @@ services:
       - LOKI_STORAGE_FILESYSTEM_CHUNKS_DIRECTORY=/loki/chunks
       - LOKI_STORAGE_FILESYSTEM_RULES_DIRECTORY=/loki/rules
     depends_on:
-      - app
+      - backend
   cadvisor:
     image: gcr.io/cadvisor/cadvisor
     ports:
